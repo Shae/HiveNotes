@@ -74,7 +74,7 @@ public class NoteDataSource {
 				NoteObject note = new NoteObject();
 				note.setId(c.getLong(c.getColumnIndex(NotesDbOpenHelper.COLUMN_ID)));
 				note.setTitle(c.getString(c.getColumnIndex(NotesDbOpenHelper.COLUMN_TITLE)));
-				note.setLevel(c.getInt(c.getColumnIndex(NotesDbOpenHelper.COLUMN_LEVEL)));
+				note.setLevel(c.getString(c.getColumnIndex(NotesDbOpenHelper.COLUMN_LEVEL)));
 				note.setNote(c.getString(c.getColumnIndex(NotesDbOpenHelper.COLUMN_NOTE)));
 			
 				notes.add(note);
@@ -104,7 +104,7 @@ public class NoteDataSource {
 				NoteObject note = new NoteObject();
 				note.setId(c.getLong(c.getColumnIndex(NotesDbOpenHelper.COLUMN_ID)));
 				note.setTitle(c.getString(c.getColumnIndex(NotesDbOpenHelper.COLUMN_TITLE)));
-				note.setLevel(c.getInt(c.getColumnIndex(NotesDbOpenHelper.COLUMN_LEVEL)));
+				note.setLevel(c.getString(c.getColumnIndex(NotesDbOpenHelper.COLUMN_LEVEL)));
 				note.setNote(c.getString(c.getColumnIndex(NotesDbOpenHelper.COLUMN_NOTE)));
 			
 				notes.add(note);
@@ -135,7 +135,7 @@ public class NoteDataSource {
 				NoteObject note = new NoteObject();
 				note.setId(c.getLong(c.getColumnIndex(NotesDbOpenHelper.COLUMN_ID)));
 				note.setTitle(c.getString(c.getColumnIndex(NotesDbOpenHelper.COLUMN_TITLE)));
-				note.setLevel(c.getInt(c.getColumnIndex(NotesDbOpenHelper.COLUMN_LEVEL)));
+				note.setLevel(c.getString(c.getColumnIndex(NotesDbOpenHelper.COLUMN_LEVEL)));
 				note.setNote(c.getString(c.getColumnIndex(NotesDbOpenHelper.COLUMN_NOTE)));
 			
 				notes.add(note);

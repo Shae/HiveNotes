@@ -3,7 +3,7 @@ package com.klusman.hivenotes;
 public class NoteObject {
 	public long id;
 	public String Title;
-    public int Level;
+    public String Level;
     public String Note;
     
     
@@ -26,10 +26,10 @@ public class NoteObject {
 	}
 	
 	
-	public int getLevel() {
+	public String getLevel() {
 		return Level;
 	}
-	public void setLevel(int level) {
+	public void setLevel(String level) {
 		Level = level;
 	}
 	

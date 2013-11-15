@@ -32,8 +32,8 @@ public class NotesDbOpenHelper extends SQLiteOpenHelper{
 	public static final String TABLE_CREATE = "CREATE TABLE " + TABLE_NOTES + " (" +
 			COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
 			COLUMN_TITLE + " TEXT NOT NULL, " +
-			COLUMN_LEVEL + " INTEGER NOT NULL, " +
-			COLUMN_NOTE + " TEXT NOT NULL, " +
+			COLUMN_LEVEL + " TEXT NOT NULL, " +
+			COLUMN_NOTE + " TEXT NOT NULL " +
 			")";
 	
 	private static final String TABLE_CREATE_LEVEL = "CREATE TABLE " + TABLE_LEVELS + " (" +
