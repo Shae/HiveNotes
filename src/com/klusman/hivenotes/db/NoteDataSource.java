@@ -57,6 +57,7 @@ public class NoteDataSource {
 		long insertid = database.insert(NotesDbOpenHelper.TABLE_NOTES, null, values); // GET AUTO ID
 		
 		note.setId(insertid); // SET the ID of the new note with the Auto generated one
+		
 		return note;
 	};
 	
@@ -67,6 +68,28 @@ public class NoteDataSource {
 		List<NoteObject> notes = new ArrayList<NoteObject>();
 		
 		Cursor c = database.query(NotesDbOpenHelper.TABLE_NOTES, allColumns, null, null, null, null, null);
+		Log.i(TAG, "Notes List Returned " + c.getCount() + " rows");
+		
+		if(c.getCount() > 0){
+			while(c.moveToNext()){
+				NoteObject note = new NoteObject();
+				note.setId(c.getLong(c.getColumnIndex(NotesDbOpenHelper.COLUMN_ID)));
+				note.setTitle(c.getString(c.getColumnIndex(NotesDbOpenHelper.COLUMN_TITLE)));
+				note.setLevel(c.getString(c.getColumnIndex(NotesDbOpenHelper.COLUMN_LEVEL)));
+				note.setNote(c.getString(c.getColumnIndex(NotesDbOpenHelper.COLUMN_NOTE)));
+			
+				notes.add(note);
+			}
+		}
+		return notes;
+	} 
+	
+	public List<NoteObject> findSpecificNoteById(long idNum){
+		
+		Log.i(TAG, "**START, FIND SPECIFIC ID: " + idNum);
+		List<NoteObject> notes = new ArrayList<NoteObject>();
+		
+		Cursor c = database.query(NotesDbOpenHelper.TABLE_NOTES, allColumns, NotesDbOpenHelper.COLUMN_ID + "=?", new String[] {String.valueOf(idNum)}, null, null, null);
 		Log.i(TAG, "Notes List Returned " + c.getCount() + " rows");
 		
 		if(c.getCount() > 0){
@@ -172,5 +195,6 @@ public class NoteDataSource {
 		database.execSQL(NotesDbOpenHelper.TABLE_CREATE);
 		Log.i(TAG, "REBUILD TABLE");
 	}
+	
 	
 }

@@ -60,5 +60,18 @@ public class NotesDbOpenHelper extends SQLiteOpenHelper{
 		
 	}
 	
+	public void deleteRow(long idNum) 
+	{
+		SQLiteDatabase db = this.getWritableDatabase();
+		try {
+			
+			db.delete(NotesDbOpenHelper.TABLE_NOTES, NotesDbOpenHelper.COLUMN_ID + "=" + idNum, null);
+			Log.i(TAG, "Deleting Note ID: " + idNum);
+		} catch (Exception e) {
+			Log.i(TAG, "Failed to Delete Note ID: " + idNum);
+			e.printStackTrace();
+		}
+	}
+	
 
 }
