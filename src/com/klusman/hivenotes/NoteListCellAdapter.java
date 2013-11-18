@@ -2,13 +2,7 @@ package com.klusman.hivenotes;
 
 import java.util.List;
 
-import com.klusman.hivenotes.db.NoteDataSource;
-import com.klusman.hivenotes.db.NotesDbOpenHelper;
-
-
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,7 +12,6 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class NoteListCellAdapter extends ArrayAdapter<NoteObject>{
 
@@ -123,52 +116,6 @@ public class NoteListCellAdapter extends ArrayAdapter<NoteObject>{
 		return rowView;
 	}
 	
-	
-//	private void popUp(){
-//		AlertDialog.Builder pop = new AlertDialog.Builder(_context);
-//		pop.setTitle(title);
-//		pop.setMessage(lvl)
-//				.setCancelable(false)
-//				.setPositiveButton("Edit",new DialogInterface.OnClickListener() {
-//					public void onClick(DialogInterface dialog,int id) {
-//						dialog.cancel();
-//					}
-//				  })
-//				 .setPositiveButton("Delete",new DialogInterface.OnClickListener() {
-//					public void onClick(DialogInterface dialog,int id) {
-//						MainActivity ma = new MainActivity();
-//						ma.deletePopUp(_ID);
-//					}
-//				  })
-//				.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
-//					public void onClick(DialogInterface dialog,int id) {
-//						dialog.cancel();
-//					}
-//				});
-//				AlertDialog alertDialog = pop.create();
-//				alertDialog.show();
-//	}
-	
-//	private void deletePopUp(){
-//		AlertDialog.Builder pop2 = new AlertDialog.Builder(_context);
-//		pop2.setTitle("Delete Note?");
-//		pop2.setMessage("Please Confirm Action.")
-//				.setCancelable(false)
-//				.setPositiveButton("Cancel",new DialogInterface.OnClickListener() {
-//					public void onClick(DialogInterface dialog,int id) {
-//						dialog.cancel();
-//					}
-//				  })
-//				.setNegativeButton("DELETE",new DialogInterface.OnClickListener() {
-//					public void onClick(DialogInterface dialog,int id) {
-//						NotesDbOpenHelper ndbos = new NotesDbOpenHelper(_context);
-//						Log.i(TAG, "Attempting to Delete Note " + _ID );
-//						ndbos.deleteRow(_ID);
-//					}
-//				});
-//				AlertDialog alertDialog = pop2.create();
-//				alertDialog.show();
-//	}
 
 
 	
