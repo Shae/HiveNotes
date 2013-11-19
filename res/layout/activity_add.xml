@@ -24,17 +24,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical" 
+                    android:gravity="center"
                     android:padding="5dp"
                     android:layout_margin="20dp"
-                     android:background="@drawable/white_70">
+                     android:background="@drawable/white_90">
 
                     <EditText
                         android:id="@+id/etTitle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="Enter Note Title"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:textStyle="bold" />
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textStyle="bold" 
+                        android:maxLength="24"/>
 
                 </LinearLayout>
 
@@ -43,13 +46,16 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical" 
                     android:padding="5dp"
+                    android:gravity="center"
                     android:layout_margin="20dp"
-                     android:background="@drawable/white_70">
+                     android:background="@drawable/white_90">
 
                     <Spinner
                         android:id="@+id/spinner"
+                        android:gravity="center"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center" />
 
                 </LinearLayout>
 
@@ -62,7 +68,7 @@
                 android:orientation="vertical" 
                 android:layout_weight="1"
                 android:weightSum="2"
-                android:background="@drawable/white_70"
+                android:background="@drawable/white_90"
              
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="20dp"
@@ -79,7 +85,7 @@
                         android:id="@+id/imageOk"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@android:drawable/checkbox_on_background" 
+                        android:src="@drawable/grn_check_bee"                        
                         android:padding="20dp"/>
 
                 </LinearLayout>
@@ -95,7 +101,7 @@
                         android:id="@+id/imageDelete2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@android:drawable/ic_menu_delete"
+                        android:src= "@drawable/trash_bee"
                         android:padding="20dp" />
 
                 </LinearLayout>
@@ -110,13 +116,14 @@
         android:id="@+id/etNote"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="top"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/white_70"
-        android:padding="20dp"
+        android:background="@drawable/white_90"
         android:hint="Enter Note"
+        android:padding="5dp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </LinearLayout>

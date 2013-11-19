@@ -43,11 +43,11 @@ public class DetailViewActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_details);
-		//_context = getBaseContext();
+
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			_ID = extras.getLong("ID");
-			Log.i(TAG, "ID Number: " + _ID);
+			//Log.i(TAG, "ID Number: " + _ID);
 		}
 		
 		datasourceNotes = new NoteDataSource(this);
@@ -62,11 +62,9 @@ public class DetailViewActivity extends Activity {
 		notes = datasourceNotes.findSpecificNoteById(_ID);
 		
 		if(notes.size() > 0){
-			
 			tvTitle.setText(notes.get(0).getTitle());
 			tvPriority.setText(notes.get(0).getLevel());
-			tvNotes.setText(notes.get(0).getNote());
-			
+			tvNotes.setText(notes.get(0).getNote());		
 		}
 		
 		edit = (ImageView)findViewById(R.id.imageEdit);
@@ -91,8 +89,7 @@ public class DetailViewActivity extends Activity {
 				deletePopUp();
 			}
 		});
-		
-		
+
 	}
 	
 	
@@ -115,6 +112,7 @@ public class DetailViewActivity extends Activity {
 							Intent intent = new Intent( DetailViewActivity.this, MainActivity.class);						
 							startActivity(intent);
 						} catch (Exception e) {
+							Log.i(TAG, "Delete row failed.");
 							e.printStackTrace();
 						}
 					}

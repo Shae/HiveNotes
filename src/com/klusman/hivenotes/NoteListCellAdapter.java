@@ -3,21 +3,16 @@ package com.klusman.hivenotes;
 import java.util.List;
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class NoteListCellAdapter extends ArrayAdapter<NoteObject>{
 
-	private static final String TAG = "NOTES_DATABASE";
+	//private static final String TAG = "NOTES_DATABASE";
 	Context _context;
 	TextView tvTitle;
 	int pos;
@@ -80,8 +75,7 @@ public class NoteListCellAdapter extends ArrayAdapter<NoteObject>{
 		lvl = _noteList.get(position).getLevel();
 		_ID = _noteList.get(position).getId();
 
-		if(lvl.equalsIgnoreCase(A)){
-			
+		if(lvl.equalsIgnoreCase(A)){		
 			bee1.setVisibility(View.VISIBLE);
 			bee2.setVisibility(View.VISIBLE);
 			bee3.setVisibility(View.VISIBLE);
@@ -89,7 +83,6 @@ public class NoteListCellAdapter extends ArrayAdapter<NoteObject>{
 		}
 		
 		if(lvl.equalsIgnoreCase(B)){
-			
 			bee1.setVisibility(View.VISIBLE);
 			bee2.setVisibility(View.VISIBLE);
 			bee3.setVisibility(View.VISIBLE);
@@ -97,13 +90,11 @@ public class NoteListCellAdapter extends ArrayAdapter<NoteObject>{
 		}
 		
 		if(lvl.equalsIgnoreCase(C)){
-			
 			bee1.setVisibility(View.VISIBLE);
 			bee2.setVisibility(View.VISIBLE);
 		}
 		
-		if(lvl.equalsIgnoreCase(D)){
-			
+		if(lvl.equalsIgnoreCase(D)){	
 			bee1.setVisibility(View.VISIBLE);
 		}
 		

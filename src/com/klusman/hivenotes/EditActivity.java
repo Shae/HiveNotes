@@ -55,7 +55,6 @@ public class EditActivity extends Activity {
 			_lvl = extras.getString("LEVEL");
 			Log.i(TAG, "EDIT: ID Number: " + _id);
 			Log.i(TAG, "EDIT: TITLE Number: " + _title);
-
 		}
 		
 		etTitle = (EditText)findViewById(R.id.etTitle);
@@ -119,10 +118,10 @@ public class EditActivity extends Activity {
 		Log.i(TAG, "etT length : " + etTitle.getText().length());
 		Log.i(TAG, "etN length : " + etNotes.getText().length());
 		if((etTitle.getText().length() > 0 ) && (etNotes.getText().length() > 0)){
-			Log.i(TAG, "Validation good!");
+			//Log.i(TAG, "Validation good!");
 			return true;
 		}
-			Log.i(TAG, "Validation failed!");
+			//Log.i(TAG, "Validation failed!");
 			myToast("Please ensure all fields are filled out.");
 		return false;
 	}
@@ -133,7 +132,7 @@ public class EditActivity extends Activity {
 		Toast toast = Toast.makeText(EditActivity.this, textIN, duration);
 		toast.setGravity(Gravity.BOTTOM, 0, 0);
 		toast.show();
-	};// end myToast
+	};
 	
 	
 	

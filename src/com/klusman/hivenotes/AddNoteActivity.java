@@ -4,13 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.klusman.hivenotes.db.NoteDataSource;
-import com.klusman.hivenotes.db.NotesDbOpenHelper;
 import com.klusman.hivenotes.db.UrgencyLevels;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -23,7 +20,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class AddNoteActivity extends Activity {
@@ -65,8 +61,7 @@ public class AddNoteActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				AddNoteActivity.this.finish();
-				//TODO  make sure this is correct
+				AddNoteActivity.this.finish();  // Delete Add by just closing activity
 			}
 		});
 		
@@ -88,8 +83,6 @@ public class AddNoteActivity extends Activity {
 					Intent intent = new Intent();
 					intent.setClass(AddNoteActivity.this, MainActivity.class);
 			        startActivity(intent);
-					
-						AddNoteActivity.this.finish();
 				}
 			}
 		});
@@ -105,17 +98,17 @@ public class AddNoteActivity extends Activity {
 		spPriority.setAdapter(adapter);
 	}
 	
+	
 	private boolean validateFields(){
-		Log.i(TAG, "etT length : " + etTitle.getText().length());
-		Log.i(TAG, "etN length : " + etNotes.getText().length());
 		if((etTitle.getText().length() > 0 ) && (etNotes.getText().length() > 0)){
-			Log.i(TAG, "Validation good!");
+			//Log.i(TAG, "Validation good!");
 			return true;
 		}
-			Log.i(TAG, "Validation failed!");
+			//Log.i(TAG, "Validation failed!");
 			myToast("Please ensure all fields are filled out.");
 		return false;
 	}
+	
 	
 	public void myToast(String text){  
 		CharSequence textIN = text;
@@ -123,7 +116,8 @@ public class AddNoteActivity extends Activity {
 		Toast toast = Toast.makeText(AddNoteActivity.this, textIN, duration);
 		toast.setGravity(Gravity.BOTTOM, 0, 0);
 		toast.show();
-	};// end myToast
+	};
+	
 	
 	private void createNote(String lvl, String title, String note) {
 		NoteObject newNote = new NoteObject();
@@ -131,6 +125,5 @@ public class AddNoteActivity extends Activity {
 		newNote.setNote(note);
 		newNote.setTitle(title);
 		newNote = datasourceNotes.create(newNote);
-		
 	}
 }

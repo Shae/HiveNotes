@@ -11,18 +11,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-	private static final String TAG = "NOTES_DATABASE";
+	//private static final String TAG = "NOTES_DATABASE";
 	
 	SQLiteOpenHelper dbHelper;
 	SQLiteDatabase database;
@@ -45,17 +45,12 @@ public class MainActivity extends Activity {
 		if(lvls.size() == 0){
 			createUrgencyLevels();
 		}
-		
-		
-		
-		listBuilder();
-		
+		listBuilder();	
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main, menu);
-		
+		getMenuInflater().inflate(R.menu.main, menu);	
 		return true;
 	}
 
@@ -65,8 +60,6 @@ public class MainActivity extends Activity {
 		super.onResume();
 		datasourceNotes.open();
 		datasourceLevels.open();	
-	
-		
 	}
 
 	@Override
@@ -75,14 +68,6 @@ public class MainActivity extends Activity {
 		datasourceNotes.close();
 		datasourceLevels.close();
 	}
-	
-	public void myToast(String text){  
-		CharSequence textIN = text;
-		int duration = Toast.LENGTH_SHORT;
-		Toast toast = Toast.makeText(MainActivity.this, textIN, duration);
-		toast.setGravity(Gravity.BOTTOM, 0, 0);
-		toast.show();
-	};// end myToast
 	
 	
 	private void createUrgencyLevels(){
@@ -104,7 +89,6 @@ public class MainActivity extends Activity {
 		lvl = new NoteUrgencyLevel();
 		lvl.setName("After the Worker Bee Retires.");
 		lvl = datasourceLevels.create(lvl);
-	
 	}
 	
 	
@@ -112,24 +96,34 @@ public class MainActivity extends Activity {
 		notes = datasourceNotes.findAllNoFilter();
 		lv = (ListView)findViewById(R.id.listView1);
 		notes = datasourceNotes.findAllNoFilter();
+		ImageView image = (ImageView)findViewById(R.id.grnPlus);
 		if(notes.size() > 0){
 			lv.setAdapter( new NoteListCellAdapter(this, notes) );
-		}	
+			image.setVisibility(View.GONE);
+		}else{
+			image.setVisibility(View.VISIBLE);
+			image.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent();
+			        intent.setClass(MainActivity.this, AddNoteActivity.class);
+			        startActivity(intent);
+					
+				}
+			});
+		}
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			
-
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
-					long arg3) {
-				//myToast("" + notes.get(pos).getId());
-				
+					long arg3) {			
 				Intent intent = new Intent(MainActivity.this, DetailViewActivity.class);
 				intent.putExtra("ID", notes.get(pos).getId());
-				startActivity(intent);
-				
+				startActivity(intent);				
 			}});
-		
 	}
+	
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item){

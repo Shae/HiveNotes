@@ -7,9 +7,6 @@ public class NoteObject {
     public String Note;
     
     
-    
-    
-    
     public long getId() {
 		return id;
 	}

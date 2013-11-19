@@ -1,6 +1,7 @@
 package com.klusman.hivenotes;
 
 public class NoteUrgencyLevel {
+	
  	public long id;
     public String name;
 

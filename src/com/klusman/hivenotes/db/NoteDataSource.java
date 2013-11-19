@@ -41,20 +41,15 @@ public class NoteDataSource {
 	}
 	
 	public NoteObject create(NoteObject note){
-		Log.i(TAG, "Create Note Function in NoteDataSource Code");
+		Log.i(TAG, "Create function in NoteDataSource Code");
 		
 		ContentValues values = new ContentValues();
 
 		values.put(NotesDbOpenHelper.COLUMN_TITLE, note.getTitle());
-			//Log.i(TAG, "Create Title : " + note.getTitle());
 		values.put(NotesDbOpenHelper.COLUMN_LEVEL, note.getLevel());
-		 	//Log.i(TAG, "Create Level : " + note.getLevel());
 		values.put(NotesDbOpenHelper.COLUMN_NOTE, note.getNote());
-		 //	Log.i(TAG, "Create Note : " + String.valueOf(note.getNote()));
-
-			
+	
 		long insertid = database.insert(NotesDbOpenHelper.TABLE_NOTES, null, values); // GET AUTO ID
-		
 		note.setId(insertid); // SET the ID of the new note with the Auto generated one
 		
 		return note;
@@ -129,8 +124,7 @@ public class NoteDataSource {
 				note.setLevel(c.getString(c.getColumnIndex(NotesDbOpenHelper.COLUMN_LEVEL)));
 				note.setNote(c.getString(c.getColumnIndex(NotesDbOpenHelper.COLUMN_NOTE)));
 			
-				notes.add(note);
-				
+				notes.add(note);		
 			}
 		}
 		return notes;
@@ -160,8 +154,7 @@ public class NoteDataSource {
 				note.setLevel(c.getString(c.getColumnIndex(NotesDbOpenHelper.COLUMN_LEVEL)));
 				note.setNote(c.getString(c.getColumnIndex(NotesDbOpenHelper.COLUMN_NOTE)));
 			
-				notes.add(note);
-				
+				notes.add(note);	
 			}
 		}
 		return notes;
