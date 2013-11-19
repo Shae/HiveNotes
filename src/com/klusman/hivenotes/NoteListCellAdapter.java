@@ -107,21 +107,6 @@ public class NoteListCellAdapter extends ArrayAdapter<NoteObject>{
 			bee1.setVisibility(View.VISIBLE);
 		}
 		
-	
-		
-//	rowView.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View arg0) {
-////				Intent intent = new Intent(_context, DetailViewActivity.class);
-////				intent.putExtra("ID", _noteList.get().getId());
-////				_context.startActivity(intent);
-//				
-//			
-//				
-//			}
-//		});
-//		
 		return rowView;
 	}
 	

@@ -61,8 +61,6 @@ public class DetailViewActivity extends Activity {
 		
 		notes = datasourceNotes.findSpecificNoteById(_ID);
 		
-		
-		
 		if(notes.size() > 0){
 			
 			tvTitle.setText(notes.get(0).getTitle());
@@ -70,6 +68,20 @@ public class DetailViewActivity extends Activity {
 			tvNotes.setText(notes.get(0).getNote());
 			
 		}
+		
+		edit = (ImageView)findViewById(R.id.imageEdit);
+		edit.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent( DetailViewActivity.this, EditActivity.class);	
+				intent.putExtra("TITLE", tvTitle.getText().toString());
+				intent.putExtra("LEVEL", tvPriority.getText().toString());
+				intent.putExtra("NOTE", tvNotes.getText().toString());
+				intent.putExtra("ID", notes.get(0).getId());
+				startActivity(intent);
+			}
+		});
 		
 		delete = (ImageView)findViewById(R.id.imageDelete);
 		delete.setOnClickListener(new OnClickListener() {
@@ -100,14 +112,9 @@ public class DetailViewActivity extends Activity {
 						Log.i(TAG, "Attempting to Delete Note " + _ID );
 						try {
 							ndbos.deleteRow(_ID);
-							//DetailViewActivity.this.finish();
-							Intent intent = new Intent( DetailViewActivity.this, MainActivity.class);
-							
+							Intent intent = new Intent( DetailViewActivity.this, MainActivity.class);						
 							startActivity(intent);
-							
-							
 						} catch (Exception e) {
-
 							e.printStackTrace();
 						}
 					}

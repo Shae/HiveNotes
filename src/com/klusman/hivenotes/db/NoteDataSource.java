@@ -167,10 +167,11 @@ public class NoteDataSource {
 		return notes;
 	} 
 	
-	public void updateNote(long longID, String newString, int newlevel) {
+	public void updateNote(long longID, String note, String newlevel, String title) {
 		ContentValues cvUpdate = new ContentValues();
-		cvUpdate.put(NotesDbOpenHelper.COLUMN_NOTE, newString);
+		cvUpdate.put(NotesDbOpenHelper.COLUMN_NOTE, note);
 		cvUpdate.put(NotesDbOpenHelper.COLUMN_LEVEL, newlevel);
+		cvUpdate.put(NotesDbOpenHelper.COLUMN_TITLE, title);
 		database.update(NotesDbOpenHelper.TABLE_NOTES, cvUpdate, NotesDbOpenHelper.COLUMN_ID + "=" + longID, null);
 		
 		Log.i(TAG, "Update Note: DONE");

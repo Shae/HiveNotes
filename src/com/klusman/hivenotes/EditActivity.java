@@ -4,16 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.klusman.hivenotes.db.NoteDataSource;
-import com.klusman.hivenotes.db.NotesDbOpenHelper;
 import com.klusman.hivenotes.db.UrgencyLevels;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -23,19 +17,18 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class AddNoteActivity extends Activity {
-	
+public class EditActivity extends Activity {
+
 	private static final String TAG = "NOTES_DATABASE";
-	
-	Context _context;
-	SQLiteOpenHelper dbHelper;
-	SQLiteDatabase database;
 	NoteDataSource datasourceNotes;
 	UrgencyLevels datasourceLevels;
-	List<NoteUrgencyLevel> levels;
+	
+	String _title;
+	String _note;
+	String _lvl;
+	long _id;
 	
 	EditText etTitle;
 	Spinner spPriority;
@@ -43,32 +36,51 @@ public class AddNoteActivity extends Activity {
 	ImageView ok;
 	ImageView delete;
 	
+	List<NoteUrgencyLevel> levels;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_add);
-
+		setContentView(R.layout.activity_edit);
 		datasourceNotes = new NoteDataSource(this);
 		datasourceNotes.open();
 		datasourceLevels = new UrgencyLevels(this);
 		datasourceLevels.open();
+	
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			_id = extras.getLong("ID");
+			_title = extras.getString("TITLE");
+			_note = extras.getString("NOTE");
+			_lvl = extras.getString("LEVEL");
+			Log.i(TAG, "EDIT: ID Number: " + _id);
+			Log.i(TAG, "EDIT: TITLE Number: " + _title);
+
+		}
 		
 		etTitle = (EditText)findViewById(R.id.etTitle);
+		etTitle.setText(_title);
+		
 		spPriority = (Spinner)findViewById(R.id.spinner);
+		
 		etNotes = (EditText)findViewById(R.id.etNote);
+		etNotes.setText(_note);
 		
 		levels = datasourceLevels.findAll();
+		List<String> list = new ArrayList<String>();
+		for(int i = 0; i < levels.size(); i++){
+			list.add(levels.get(i).getName());
+		}
 		
-		delete = (ImageView)findViewById(R.id.imageDelete2);
-		delete.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				AddNoteActivity.this.finish();
-				//TODO  make sure this is correct
-			}
-		});
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, list);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spPriority.setAdapter(adapter);
+		
+		@SuppressWarnings("unchecked")
+		ArrayAdapter<String> AA = (ArrayAdapter<String>) spPriority.getAdapter();
+		int spinPos = AA.getPosition(_lvl);
+		spPriority.setSelection(spinPos);
+		
 		
 		ok = (ImageView)findViewById(R.id.imageOk);
 		ok.setOnClickListener(new OnClickListener() {
@@ -78,31 +90,29 @@ public class AddNoteActivity extends Activity {
 				
 				boolean good = validateFields();
 				if(good == true){
-					Log.i(TAG, "SAVE HERE!");
 					datasourceNotes.open();
-					createNote(
-							String.valueOf(spPriority.getSelectedItem()), 
-							etTitle.getText().toString(), 
-							etNotes.getText().toString());
+
+					String T = etTitle.getText().toString();
+					String N = etNotes.getText().toString();
+					String L = String.valueOf(spPriority.getSelectedItem());
+					try {
+						datasourceNotes.updateNote(_id, N, L, T);
+						Log.i(TAG, "Update Complete");
+						Intent intent = new Intent();
+						intent.setClass(EditActivity.this, MainActivity.class);
+				        startActivity(intent);
+					} catch (Exception e) {
+						Log.i(TAG, "Update Failed");
+						e.printStackTrace();
+					}
+
 					datasourceNotes.close();
-					Intent intent = new Intent();
-					intent.setClass(AddNoteActivity.this, MainActivity.class);
-			        startActivity(intent);
+
 					
-						AddNoteActivity.this.finish();
 				}
 			}
 		});
 		
-		
-		List<String> list = new ArrayList<String>();
-		for(int i = 0; i < levels.size(); i++){
-			list.add(levels.get(i).getName());
-		}
-		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, list);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spPriority.setAdapter(adapter);
 	}
 	
 	private boolean validateFields(){
@@ -120,17 +130,12 @@ public class AddNoteActivity extends Activity {
 	public void myToast(String text){  
 		CharSequence textIN = text;
 		int duration = Toast.LENGTH_SHORT;
-		Toast toast = Toast.makeText(AddNoteActivity.this, textIN, duration);
+		Toast toast = Toast.makeText(EditActivity.this, textIN, duration);
 		toast.setGravity(Gravity.BOTTOM, 0, 0);
 		toast.show();
 	};// end myToast
 	
-	private void createNote(String lvl, String title, String note) {
-		NoteObject newNote = new NoteObject();
-		newNote.setLevel(lvl);
-		newNote.setNote(note);
-		newNote.setTitle(title);
-		newNote = datasourceNotes.create(newNote);
-		
-	}
+	
+	
+	
 }

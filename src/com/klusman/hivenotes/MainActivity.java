@@ -54,7 +54,6 @@ public class MainActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		
 		return true;
@@ -108,14 +107,6 @@ public class MainActivity extends Activity {
 	
 	}
 	
-	private void createTestNote() {
-		NoteObject newNote = new NoteObject();
-		newNote.setLevel("The Queen Bee Says, NOW! ");
-		newNote.setNote("Test Test");
-		newNote.setTitle("TestTubeBabies");
-		newNote = datasourceNotes.create(newNote);
-		
-	}
 	
 	public void listBuilder(){
 		notes = datasourceNotes.findAllNoFilter();
@@ -130,7 +121,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
 					long arg3) {
-				myToast("" + notes.get(pos).getId());
+				//myToast("" + notes.get(pos).getId());
 				
 				Intent intent = new Intent(MainActivity.this, DetailViewActivity.class);
 				intent.putExtra("ID", notes.get(pos).getId());

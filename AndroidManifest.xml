@@ -12,7 +12,8 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme" 
+        >
         <activity
             android:name="com.klusman.hivenotes.MainActivity"
             android:label="@string/app_name" 
@@ -23,8 +24,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.klusman.hivenotes.DetailViewActivity" />
-        <activity android:name="com.klusman.hivenotes.AddNoteActivity" />
+        <activity android:name="com.klusman.hivenotes.DetailViewActivity" 
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.klusman.hivenotes.AddNoteActivity" 
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.klusman.hivenotes.EditActivity" 
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
