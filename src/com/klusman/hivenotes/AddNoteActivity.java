@@ -11,10 +11,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -22,6 +24,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AddNoteActivity extends Activity {
 	
@@ -75,8 +78,27 @@ public class AddNoteActivity extends Activity {
 				boolean good = validateFields();
 				if(good == true){
 					//ADD SAVE FUNCTIONALITY HERE
-					Log.i(TAG, "SAVE HERE!");
+						Log.i(TAG, "SAVE HERE!");
+//					NoteDataSource nds = new NoteDataSource(_context);
+//					NoteObject nObj = new NoteObject();
+//					nObj.Title = etTitle.getText().toString();
+//					Log.i(TAG, "SAVE HERE!" + etTitle.getText().toString());
+//					nObj.Note = etNotes.getText().toString();
+//					Log.i(TAG, "SAVE HERE!" + etNotes.getText().toString());
+//					nObj.Level = String.valueOf(spPriority.getSelectedItem());
+//					Log.i(TAG, "SAVE HERE!" + String.valueOf(spPriority.getSelectedItem()));
+//					nds.create(nObj);
+					datasourceNotes.open();
+						createNote(
+								String.valueOf(spPriority.getSelectedItem()), 
+								etTitle.getText().toString(), 
+								etNotes.getText().toString());
+					datasourceNotes.close();
+					Intent intent = new Intent();
+					intent.setClass(AddNoteActivity.this, MainActivity.class);
+			        startActivity(intent);
 					
+						AddNoteActivity.this.finish();
 				}
 			}
 		});
@@ -99,8 +121,25 @@ public class AddNoteActivity extends Activity {
 			Log.i(TAG, "Validation good!");
 			return true;
 		}
-		Log.i(TAG, "Validation failed!");
+			Log.i(TAG, "Validation failed!");
+			myToast("Please ensure all fields are filled out.");
 		return false;
 	}
 	
+	public void myToast(String text){  
+		CharSequence textIN = text;
+		int duration = Toast.LENGTH_SHORT;
+		Toast toast = Toast.makeText(AddNoteActivity.this, textIN, duration);
+		toast.setGravity(Gravity.BOTTOM, 0, 0);
+		toast.show();
+	};// end myToast
+	
+	private void createNote(String lvl, String title, String note) {
+		NoteObject newNote = new NoteObject();
+		newNote.setLevel(lvl);
+		newNote.setNote(title);
+		newNote.setTitle(note);
+		newNote = datasourceNotes.create(newNote);
+		
+	}
 }

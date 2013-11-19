@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
@@ -71,8 +72,6 @@ public class DetailViewActivity extends Activity {
 		}
 		
 		delete = (ImageView)findViewById(R.id.imageDelete);
-		
-		
 		delete.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -101,7 +100,11 @@ public class DetailViewActivity extends Activity {
 						Log.i(TAG, "Attempting to Delete Note " + _ID );
 						try {
 							ndbos.deleteRow(_ID);
-							DetailViewActivity.this.finish();
+							//DetailViewActivity.this.finish();
+							Intent intent = new Intent( DetailViewActivity.this, MainActivity.class);
+							
+							startActivity(intent);
+							
 							
 						} catch (Exception e) {
 

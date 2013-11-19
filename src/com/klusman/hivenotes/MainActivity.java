@@ -14,6 +14,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -117,15 +120,23 @@ public class MainActivity extends Activity {
 	public void listBuilder(){
 		notes = datasourceNotes.findAllNoFilter();
 		lv = (ListView)findViewById(R.id.listView1);
-
-		if(notes.size() == 0){
-			createTestNote();
-			notes = datasourceNotes.findAllNoFilter();
-		}
-		
+		notes = datasourceNotes.findAllNoFilter();
 		if(notes.size() > 0){
-			lv.setAdapter( new NoteListCellAdapter(this, notes));
+			lv.setAdapter( new NoteListCellAdapter(this, notes) );
 		}	
+		lv.setOnItemClickListener(new OnItemClickListener() {
+			
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
+					long arg3) {
+				myToast("" + notes.get(pos).getId());
+				
+				Intent intent = new Intent(MainActivity.this, DetailViewActivity.class);
+				intent.putExtra("ID", notes.get(pos).getId());
+				startActivity(intent);
+				
+			}});
 		
 	}
 	
@@ -140,5 +151,6 @@ public class MainActivity extends Activity {
 	    }
 	    return false;
 	}
+
 	
 }

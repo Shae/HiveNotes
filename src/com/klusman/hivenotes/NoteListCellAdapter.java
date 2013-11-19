@@ -5,6 +5,7 @@ import java.util.List;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class NoteListCellAdapter extends ArrayAdapter<NoteObject>{
 
@@ -20,7 +22,7 @@ public class NoteListCellAdapter extends ArrayAdapter<NoteObject>{
 	TextView tvTitle;
 	int pos;
 	
-	long _ID;
+	long _ID = -1;
 	String title = "";
 	String note = "";
 	String lvl = "";
@@ -49,6 +51,11 @@ public class NoteListCellAdapter extends ArrayAdapter<NoteObject>{
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) _context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+		_ID = -1;
+		title = "";
+		note = "";
+		lvl = "";
+		
 		View rowView = inflater.inflate(R.layout.custom_cell, parent, false);
 		tvTitle = (TextView) rowView.findViewById(R.id.tvCellTitle);
 		pos = position;
@@ -74,7 +81,7 @@ public class NoteListCellAdapter extends ArrayAdapter<NoteObject>{
 		_ID = _noteList.get(position).getId();
 
 		if(lvl.equalsIgnoreCase(A)){
-			Log.i(TAG, "String A true " + A);
+			
 			bee1.setVisibility(View.VISIBLE);
 			bee2.setVisibility(View.VISIBLE);
 			bee3.setVisibility(View.VISIBLE);
@@ -82,7 +89,7 @@ public class NoteListCellAdapter extends ArrayAdapter<NoteObject>{
 		}
 		
 		if(lvl.equalsIgnoreCase(B)){
-			Log.i(TAG, "String A true " + B);
+			
 			bee1.setVisibility(View.VISIBLE);
 			bee2.setVisibility(View.VISIBLE);
 			bee3.setVisibility(View.VISIBLE);
@@ -90,29 +97,31 @@ public class NoteListCellAdapter extends ArrayAdapter<NoteObject>{
 		}
 		
 		if(lvl.equalsIgnoreCase(C)){
-			Log.i(TAG, "String A true " + C);
+			
 			bee1.setVisibility(View.VISIBLE);
 			bee2.setVisibility(View.VISIBLE);
 		}
 		
 		if(lvl.equalsIgnoreCase(D)){
-			Log.i(TAG, "String A true " + D);
+			
 			bee1.setVisibility(View.VISIBLE);
 		}
 		
 	
 		
-	rowView.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				//Toast.makeText(getContext(),name,Toast.LENGTH_SHORT).show();
-				//popUp();
-				Intent intent = new Intent(_context, DetailViewActivity.class);
-				intent.putExtra("ID", _ID);
-				_context.startActivity(intent);
-			}
-		});
+//	rowView.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View arg0) {
+////				Intent intent = new Intent(_context, DetailViewActivity.class);
+////				intent.putExtra("ID", _noteList.get().getId());
+////				_context.startActivity(intent);
+//				
+//			
+//				
+//			}
+//		});
+//		
 		return rowView;
 	}
 	

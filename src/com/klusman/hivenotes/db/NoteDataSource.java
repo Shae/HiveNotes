@@ -44,14 +44,13 @@ public class NoteDataSource {
 		Log.i(TAG, "Create Note Function in NoteDataSource Code");
 		
 		ContentValues values = new ContentValues();
-		values.put(NotesDbOpenHelper.COLUMN_ID, note.getId());
-			Log.i(TAG, "Create ID : " + String.valueOf(note.getId()));
+
 		values.put(NotesDbOpenHelper.COLUMN_TITLE, note.getTitle());
-			Log.i(TAG, "Create Title : " + note.getTitle());
+			//Log.i(TAG, "Create Title : " + note.getTitle());
 		values.put(NotesDbOpenHelper.COLUMN_LEVEL, note.getLevel());
-		 	Log.i(TAG, "Create Level : " + note.getLevel());
+		 	//Log.i(TAG, "Create Level : " + note.getLevel());
 		values.put(NotesDbOpenHelper.COLUMN_NOTE, note.getNote());
-		 	Log.i(TAG, "Create Note : " + String.valueOf(note.getNote()));
+		 //	Log.i(TAG, "Create Note : " + String.valueOf(note.getNote()));
 
 			
 		long insertid = database.insert(NotesDbOpenHelper.TABLE_NOTES, null, values); // GET AUTO ID
@@ -176,6 +175,7 @@ public class NoteDataSource {
 		
 		Log.i(TAG, "Update Note: DONE");
 	}
+	
 	
 	public void SaveNewNote(long longID, String title, int level,
 			String note) {
