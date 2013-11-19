@@ -24,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.klusman.hivenotes.DetailViewActivity" />
+        <activity android:name="com.klusman.hivenotes.AddNoteActivity" />
     </application>
 
 </manifest>
